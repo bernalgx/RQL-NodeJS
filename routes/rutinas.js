@@ -25,48 +25,48 @@ router.get('/', function (req, res, next) {
                 console.log(user_id);
                 var sql = "SELECT rutinas.id_rutina,rutinas.evento, dispositivos.id, eventos.nombre, rutinas.numero,rutinas.texto,rutinas.activo FROM rutinas,dispositivos,eventos where dispositivos.usuario = '" + user_id + "' and dispositivos.id = rutinas.dispositivo and eventos.id = rutinas.evento"
                 db.query(sql, function (err, result) {
-                    if (err){
-                     manejo_errores(1,err, res);
-                 }
-                 else
-                 {
-                    var sql = ("SELECT nombre FROM usuarios WHERE id='" + user_id + "' LIMIT 1;");
-                    var dbUsuario = req.db();
-                    dbUsuario.query(sql, function (err, resultUsuario) {
-                        if (err) {
-                            manejo_errores(1,err, res);
-                        }
-                        else
-                        {
-                            res.render('rutinas/lista_rutinas', {
-                                user: {loged: false},
-                                pagina: {titulo: "Rutinas", navbar: true},
-                                permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos")},
-                                userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
-                                nombreUsuario: !misRutinas ? "Rutinas de " + resultUsuario[0].nombre : "Mis Rutinas",
-                                user_id: user_id,
-                                misRutinas: misRutinas,
-                                rutinas_delete: usu.permiso("rutinas_delete"),
-                                lista_rutinas: result
-                            });
-                        }
-                    });
-dbUsuario.end();
-}
-});
-db.end();
-}
-else
-{
-    manejo_errores(3,err="NO TIENE PERMISOS PARA VER RUTINAS DE OTROS USUARIOS", res);
-}
-}
-else
-{
-    res.location("/usuario/identificar");
-    res.redirect("/usuario/identificar");
-}
-});
+                    if (err) {
+                        manejo_errores(1, err, res);
+                    }
+                    else
+                    {
+                        var sql = ("SELECT nombre FROM usuarios WHERE id='" + user_id + "' LIMIT 1;");
+                        var dbUsuario = req.db();
+                        dbUsuario.query(sql, function (err, resultUsuario) {
+                            if (err) {
+                                manejo_errores(1, err, res);
+                            }
+                            else
+                            {
+                                res.render('rutinas/lista_rutinas', {
+                                    user: {loged: false},
+                                    pagina: {titulo: "Rutinas", navbar: true},
+                                    permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos")},
+                                    userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
+                                    nombreUsuario: !misRutinas ? "Rutinas de " + resultUsuario[0].nombre : "Mis Rutinas",
+                                    user_id: user_id,
+                                    misRutinas: misRutinas,
+                                    rutinas_delete: usu.permiso("rutinas_delete"),
+                                    lista_rutinas: result
+                                });
+                            }
+                        });
+                        dbUsuario.end();
+                    }
+                });
+                db.end();
+            }
+            else
+            {
+                manejo_errores(3, err = "NO TIENE PERMISOS PARA VER RUTINAS DE OTROS USUARIOS", res);
+            }
+        }
+        else
+        {
+            res.location("/usuario/identificar");
+            res.redirect("/usuario/identificar");
+        }
+    });
 });
 
 router.get('/editar', function (req, res, next) {
@@ -99,25 +99,25 @@ router.get('/editar', function (req, res, next) {
 
                 db1.query(sql, function (err, result1) {
                     if (err) {
-                        manejo_errores(1,err, res);
+                        manejo_errores(1, err, res);
                     } else {
                         sql = "select id from dispositivos where usuario  = '" + user_id + "'";
                         db2.query(sql, function (err, result2) {
                             if (err) {
-                                manejo_errores(1,err, res);
+                                manejo_errores(1, err, res);
                             } else {
                                 sql = "select id,nombre from eventos";
                                 db3.query(sql, function (err, result3) {
                                     if (err)
                                     {
-                                        manejo_errores(1,err, res);
+                                        manejo_errores(1, err, res);
                                     } else {
                                         if (err)
                                         {
-                                            manejo_errores(1,err, res);
+                                            manejo_errores(1, err, res);
                                         } else {
                                             if (result1.length === 0) {
-                                                manejo_errores(3,err = "La Rutina no existe", res);
+                                                manejo_errores(3, err = "La Rutina no existe", res);
                                             } else {
                                                 res.render('rutinas/editarrutina', {
                                                     user: {loged: false},
@@ -136,25 +136,25 @@ router.get('/editar', function (req, res, next) {
                                         }
                                     }
                                 });
-db3.end();
-}
-});
-db2.end();
-}
-});
-db1.end();
-}
-else
-{
-    manejo_errores(1,err="NO TIENE PERMISOS PARA EDITAR RUTINAS", res);
-}
-}
-else
-{
-    res.location("/usuario/identificar");
-    res.redirect("/usuario/identificar");
-}
-});
+                                db3.end();
+                            }
+                        });
+                        db2.end();
+                    }
+                });
+                db1.end();
+            }
+            else
+            {
+                manejo_errores(1, err = "NO TIENE PERMISOS PARA EDITAR RUTINAS", res);
+            }
+        }
+        else
+        {
+            res.location("/usuario/identificar");
+            res.redirect("/usuario/identificar");
+        }
+    });
 });
 
 router.post('/editar', function (req, res, next) {
@@ -169,7 +169,7 @@ router.post('/editar', function (req, res, next) {
     sql = "UPDATE rutinas SET numero='" + numero + "' ,texto='" + texto + "' ,evento='" + evento + "' ,dispositivo='" + dispositivo + "' WHERE id_rutina='" + id_rutina + " '";
     db.query(sql, function (err, result) {
         if (err) {
-            manejo_errores(1,err, res);
+            manejo_errores(1, err, res);
         }
         else
         {
@@ -186,7 +186,6 @@ router.post('/editar', function (req, res, next) {
         }
     });
 });
-
 
 
 router.get('/agregar', function (req, res, next) {
@@ -210,47 +209,72 @@ router.get('/agregar', function (req, res, next) {
 
             if ((misRutinas) || (usu.permiso("rutinas_all")))
             {
-                var db2 = req.db("monitor");
-                var db3 = req.db("monitor");
+                var dbNombre = req.db();
+                dbNombre.query("SELECT nombre FROM usuarios WHERE id='" + user_id + "' LIMIT 1", function (err, resultNombre)
+                {
+                    if (err)
+                    {
+                        manejo_errores(err, res);
+                    }
+                    else
+                    {
+                        var db2 = req.db("monitor");
+                        var db3 = req.db("monitor");
 
-                sql = "select id from dispositivos where usuario  = '" + user_id + "'";
-                
-                db2.query(sql, function (err, result2) {
-                    if (err) {
-                    } else {
-                        sql = "select id,nombre from eventos";
-                        db3.query(sql, function (err, result3) {
-                            if (err)
+                        sql = "select id from dispositivos where usuario  = '" + user_id + "'";
+                        //console.log(chalk.green(sql));
+                        db2.query(sql, function (err, result2) {
+                            if (err) {
+                                //console.log(chalk.red('error2++' + err));
+                            }
+                            else
                             {
-                            } else {
-                                res.render('rutinas/agregarrutina', {
-                                    user: {loged: false},
-                                    pagina: {titulo: "Rutinas", navbar: true},
-                                    permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos")},
-                                    userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
-                                    misRutinas: misRutinas,
-                                    user_id: user_id,
-                                    disp: result2,
-                                    eventos: result3
-                                });
+                                if (result2.length > 0)
+                                {
+                                    sql = "select id,nombre from eventos";
+                                    db3.query(sql, function (err, result3) {
+                                        if (err)
+                                        {
+                                            //console.log(chalk.red('error3++' + err));
+                                        } else {
+
+                                            res.render('rutinas/agregarrutina', {
+                                                user: {loged: false},
+                                                pagina: {titulo: "Rutinas", navbar: true},
+                                                permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos")},
+                                                userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
+                                                misRutinas: misRutinas,
+                                                user_id: user_id,
+                                                disp: result2,
+                                                eventos: result3
+                                            });
+                                        }
+                                    });
+                                    db3.end();
+                                }
+                                else
+                                {
+                                    manejo_errores(2, err = !misRutinas ? 'NO SE PUDE AGREGAR RUTINA. NO HAY NINGUN DISPOSITIVO ASIGNADO AL USUARIO '+ resultNombre[0].nombre.toUpperCase() : 'NO SE PUDE AGREGAR RUTINA. USTED NO TIENE NINGUN DISPOSITIVO ASIGNADO', res);
+                                }
                             }
                         });
-                        db3.end();
+                        db2.end();
                     }
                 });
-db2.end();
-}
-else
-{
-    manejo_errores(1,err="NO TIENE PERMISOS PARA AGREGAR RUTINAS DE OTROS USUARIOS", res);
-}
-}
-else
-{
-    res.location("/usuario/identificar");
-    res.redirect("/usuario/identificar");
-}
-});
+                dbNombre.end();
+            }
+            else
+            {
+
+                manejo_errores(2, err = "NO TIENE PERMISOS PARA AGREGAR RUTINAS DE OTROS USUARIOS", res);
+            }
+        }
+        else
+        {
+            res.location("/usuario/identificar");
+            res.redirect("/usuario/identificar");
+        }
+    });
 });
 
 router.post('/agregar', function (req, res, next) {
@@ -270,23 +294,23 @@ router.post('/agregar', function (req, res, next) {
     db.query(sql, function (err, result3) {
         if (err)
         {
-            manejo_errores(1,err, res);
+            manejo_errores(1, err, res);
         }
         else
         {
-         if (misRutinas == "true")
-         {
-            res.location("/rutinas");
-            res.redirect("/rutinas");
+            if (misRutinas == "true")
+            {
+                res.location("/rutinas");
+                res.redirect("/rutinas");
 
+            }
+            else
+            {
+                res.location("/rutinas?idUsuario=" + user_id);
+                res.redirect("/rutinas?idUsuario=" + user_id);
+            }
         }
-        else
-        {
-            res.location("/rutinas?idUsuario=" + user_id);
-            res.redirect("/rutinas?idUsuario=" + user_id);
-        }
-    }
-});
+    });
     db.end();
 });
 
@@ -308,38 +332,39 @@ router.get('/remover', function (req, res, next) {
                 {
                     user_id = req.query.idUsuario;
                     misRutinas = false;
-                }
-                    var db = req.db("monitor");
-                    var sql = "SELECT id_rutina,eventos.nombre,dispositivo FROM rutinas,eventos where eventos.id= rutinas.evento and rutinas.id_rutina = '" + req.query.id_rutina + "'";
 
-                    db.query(sql, function (err, result) {
-                        if (err) {
-                            manejo_errores(1,err, res);
-                        } else {
-                            res.render('rutinas/remover_rutina', {
-                                user: {loged: false},
-                                pagina: {titulo: "Remover", navbar: true},
-                                permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos")},
-                                userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
-                                misRutinas: misRutinas,
-                                user_id: user_id,
-                                rutina: result[0]
-                            });
-                        }
-                    });
-                    db.end();
                 }
-                else
-                {
-                    manejo_errores(3,err ="NO TIENE PERMISOS PARA REMOVER RUTINAS", res);
-                }
+                var db = req.db("monitor");
+                var sql = "SELECT id_rutina,eventos.nombre,dispositivo FROM rutinas,eventos where eventos.id= rutinas.evento and rutinas.id_rutina = '" + req.query.id_rutina + "'";
+
+                db.query(sql, function (err, result) {
+                    if (err) {
+                        manejo_errores(1, err, res);
+                    } else {
+                        res.render('rutinas/remover_rutina', {
+                            user: {loged: false},
+                            pagina: {titulo: "Remover", navbar: true},
+                            permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos")},
+                            userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
+                            misRutinas: misRutinas,
+                            user_id: user_id,
+                            rutina: result[0]
+                        });
+                    }
+                });
+                db.end();
             }
             else
             {
-                res.location("/usuario/identificar");
-                res.redirect("/usuario/identificar");
+                manejo_errores(3, err = "NO TIENE PERMISOS PARA REMOVER RUTINAS", res);
             }
-        });
+        }
+        else
+        {
+            res.location("/usuario/identificar");
+            res.redirect("/usuario/identificar");
+        }
+    });
 });
 
 router.post('/remover', function (req, res, next) {
@@ -365,7 +390,7 @@ router.post('/remover', function (req, res, next) {
     {
         if (err)
         {
-            manejo_errores(1,err, res);
+            manejo_errores(1, err, res);
         }
         else
         {
