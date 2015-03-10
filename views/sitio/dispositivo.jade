@@ -49,16 +49,16 @@ block javascripts
                 graficoLinear("#trabajo","Horas trabajadas","Horas",entradasLinear,dataLinear);
             }
         });
-    block principal
-        div.panel.panel-success
-            div.panel-heading
-                
-                h2 Informacion del dispositivo #{dispositivo.id} (#{dispositivo.tipo})
-                    small
-                        #{dispositivo.notas}
-            div.panel-body
-                div#fallos(style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto")
-                div#trabajo(style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto")
+block principal
+    div.panel.panel-success
+        div.panel-heading
+            
+            h2 Informacion del dispositivo #{dispositivo.id} (#{dispositivo.tipo})
+                small
+                    #{dispositivo.notas}
+        div.panel-body
+            div#fallos(style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto")
+            div#trabajo(style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto")
 
                 
     
