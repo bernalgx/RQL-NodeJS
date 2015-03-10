@@ -17,7 +17,7 @@ router.get('/identificar', function (req, res, next) {
         else
         {
             var nombre = usu.get("nombre");
-            manejo_errores(1, err = nombre + ' ya esta identificado', res);
+            manejo_errores(1,err= nombre + ' ya esta identificado', res);
         }
     });
 });
@@ -52,13 +52,13 @@ router.post('/identificar', function (req, res, next) {
                         {
                             if (err)
                             {
-                                manejo_errores(1, err, res);
-                            }
-                            else
-                            {
-                                console.log("RECORDAR")
-                            }
-                        });
+                               manejo_errores(1,err, res);
+                           }
+                           else 
+                           {
+                            console.log("RECORDAR")
+                        }
+                    });
                         dbSesiones.end();
                     }
                     identificar = true;
@@ -74,12 +74,12 @@ router.post('/identificar', function (req, res, next) {
                 }
             }
         });
-        db.end();
-    }
-    else {
-        res.location("/usuario");
-        res.redirect("/usuario");
-    }
+db.end();
+}
+else {
+    res.location("/usuario");
+    res.redirect("/usuario");
+}
 });
 
 router.get('/agregar', function (req, res, next) {
@@ -110,7 +110,7 @@ router.get('/agregar', function (req, res, next) {
             }
             else
             {
-                manejo_errores(1, err = 'NO TIENE PERMISOS PARA AGREGAR USUARIOS', res);
+                manejo_errores(1,err='NO TIENE PERMISOS PARA AGREGAR USUARIOS', res);
             }
         }
         else {
@@ -139,7 +139,7 @@ router.post('/agregar', function (req, res, next) {
                 var db = req.db();
                 db.query("INSERT INTO usuarios (nombre,pass,role,Activo) VALUES ('" + usuario + "',SHA1('" + pass + "'),'" + role + "','" + activeuser + "')", function (err, result) {
                     if (err) {
-                        manejo_errores(1, err, res);
+                        manejo_errores(1,err,res);
                     } else {
                         res.location("/usuario");
                         res.redirect("/usuario");
@@ -149,13 +149,13 @@ router.post('/agregar', function (req, res, next) {
             }
             else
             {
-                manejo_errores(2, err = "LA CONTRASEÑA NO COINCIDE, REGRESE Y VUELVA A DIGITARLA", res);
+                manejo_errores(2,err = "LA CONTRASEÑA NO COINCIDE, REGRESE Y VUELVA A DIGITARLA", res);
             }
         });
     }
     else
     {
-        manejo_errores(2, err = "Ingrese datos correctos, verifique que la contraseña tenga 4 caracteres o más.", res);
+        manejo_errores(2,err = "Ingrese datos correctos, verifique que la contraseña tenga 4 caracteres o más.", res);
     }
 });
 
@@ -181,26 +181,26 @@ router.get('/', function (req, res, next) {
                 db.query("SELECT * FROM  usuarios", function (err, result) {
                     if (err)
                     {
-                        manejo_errores(1, err, res);
+                        manejo_errores(1,err, res);
                     }
                     else
                     {
                         res.render('usuario/lista_usuarios',
-                                {
-                                    user: {loged: false},
-                                    pagina: {titulo: "Usuarios", navbar: true},
-                                    lista_usuarios: result,
-                                    permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos")},
-                                    userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
-                                    usuario: result.id
-                                });
+                        {
+                            user: {loged: false},
+                            pagina: {titulo: "Usuarios", navbar: true},
+                            lista_usuarios: result,
+                            permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos")},
+                            userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
+                            usuario: result.id
+                        });
                     }
                 });
                 db.end();
             }
             else
             {
-                manejo_errores(1, err = 'NO TIENE PERMISOS PARA VER OTROS USUARIOS', res);
+                manejo_errores(1,err='NO TIENE PERMISOS PARA VER OTROS USUARIOS', res);
             }
         }
         else {
@@ -231,48 +231,47 @@ router.get('/editar', function (req, res, next) {
             var db = req.db();
             db.query("SELECT id,nombre,role FROM usuarios WHERE id='" + user_id + "' LIMIT 1", function (err, result_usuarios) {
                 if (err) {
-                    manejo_errores(1, err, res);
+                    manejo_errores(1,err, res);
                 } else {
                     if (result_usuarios.length === 0) {
-                        manejo_errores(3, err = "El usuario no existe", res);
+                        manejo_errores(3,err = "El usuario no existe", res);
                     } else {
                         var dbRoles = req.db();
                         dbRoles.query("SELECT id,nombre FROM roles ", function (err, result_roles) {
                             if (err) {
-                                manejo_errores(1, err, res);
+                                manejo_errores(1,err, res);
                             } else {
-                                if ((miUsuario) || (usu.permiso("user_edit"))) {
-                                    res.render('usuario/editar', {
-                                        user: {loged: false},
-                                        pagina: {titulo: "Usuario", navbar: true},
-                                        usuario: result_usuarios[0],
-                                        nombreUsuario: !miUsuario ? "Editando Usuario de " + result_usuarios[0].nombre : "Editando mi Usuario",
-                                        miUsuario: miUsuario,
-                                        roles: result_roles,
-                                        role: result_usuarios[0].role,
-                                        permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos"), user_edit: usu.permiso("user_edit")},
-                                        userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
-                                        id: req.query.idUsuario
-                                    });
-                                }
-                                else
-                                {
-                                    manejo_errores(3, err = 'NO TIENE PERMISOS PARA EDITAR OTROS USUARIOS', res);
-                                }
+                                if ((miUsuario) || (usu.permiso("user_edit"))){ res.render('usuario/editar', {
+                                    user: {loged: false},
+                                    pagina: {titulo: "Usuario", navbar: true},
+                                    usuario: result_usuarios[0],
+                                    nombreUsuario: !miUsuario ? "Editando Usuario de " + result_usuarios[0].nombre : "Editando mi Usuario",
+                                    miUsuario: miUsuario,
+                                    roles: result_roles,
+                                    role: result_usuarios[0].role,
+                                    permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos"), user_edit: usu.permiso("user_edit")},
+                                    userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
+                                    id: req.query.idUsuario
+                                });
                             }
-                        });
-                        dbRoles.end();
-                    }
-                }
-            });
-            db.end();
-        }
-        else
-        {
-            res.location("/usuario/identificar");
-            res.redirect("/usuario/identificar");
-        }
-    });
+                            else
+                            {
+                                manejo_errores(3,err='NO TIENE PERMISOS PARA EDITAR OTROS USUARIOS', res);
+                            }
+                        }
+                    });
+dbRoles.end();
+}
+}
+});
+db.end();
+}
+else
+{
+    res.location("/usuario/identificar");
+    res.redirect("/usuario/identificar");
+}
+});
 });
 
 router.post('/editar', function (req, res, next) {
@@ -295,29 +294,29 @@ router.post('/editar', function (req, res, next) {
             if (pass === pass2) {
                 db.query("UPDATE usuarios SET nombre='" + nombre + "' ,pass=sha1('" + pass + "'),role='" + role + "' WHERE id='" + usuario_id + " '", function (err, result) {
                     if (err) {
-                        manejo_errores(1, err, res);
-                    } else
+                     manejo_errores(1,err, res);
+                 } else
+                 {
+                    if (miUsuario == "true")
                     {
-                        if (miUsuario == "true")
-                        {
-                            res.location("/usuario/disp");
-                            res.redirect("/usuario/disp");
+                     res.location("/usuario/disp");
+                     res.redirect("/usuario/disp");
 
-                        }
-                        else
-                        {
-                            res.location("/usuario");
-                            res.redirect("/usuario");
-                        }
+                 }
+                 else
+                 {
+                    res.location("/usuario");
+                    res.redirect("/usuario");
+                }
 
 
-                    }
-                });
+            }
+        });
                 db.end();
             }
             else
             {
-                manejo_errores(3, err = 'LA CONTRASEÑA NO COINCIDE, REGRESE Y VUELVA A DIGITARLA', res);
+                manejo_errores(3,err='LA CONTRASEÑA NO COINCIDE, REGRESE Y VUELVA A DIGITARLA', res);
             }
         }
         else
@@ -337,7 +336,7 @@ router.get('/remover', function (req, res, next) {
                 var db = req.db();
                 db.query("SELECT id,nombre FROM usuarios WHERE id=  '" + req.query.idUsuario + "' LIMIT 1", function (err, result_usuarios) {
                     if (err) {
-                        manejo_errores(1, err, res);
+                        manejo_errores(1,err, res);
                     } else {
                         res.render('usuario/remover', {
                             user: {loged: false},
@@ -351,7 +350,7 @@ router.get('/remover', function (req, res, next) {
                 db.end();
             }
             else {
-                manejo_errores(3, err = 'NO TIENE PERMISOS PARA REMOVER USUARIOS', res);
+                manejo_errores(3,err='NO TIENE PERMISOS PARA REMOVER USUARIOS', res);
             }
         }
         else
@@ -379,7 +378,7 @@ router.post('/remover', function (req, res, next) {
         });
         db.end();
     } else {
-        manejo_errores(1, err, res);
+        manejo_errores(1,err, res);
     }
 });
 
@@ -415,17 +414,17 @@ router.get('/disp', function (req, res, next) {
                         manejo_errores(err, res);
                         console.log(err);
                     }
-                    else
+                    else 
                     {
 
                         var sql = ("SELECT nombre FROM usuarios WHERE id='" + user_id + "' LIMIT 1;");
                         var dbUsuario = req.db();
                         dbUsuario.query(sql, function (err, resultUsuario) {
-                            if (err)
+                            if (err) 
                             {
-                                manejo_errores(1, err, res);
+                                manejo_errores(1,err, res);
                             }
-                            else
+                            else 
                             {
                                 res.render("sitio/escritorio", {
                                     pagina: {titulo: "Escritorio", navbar: true},
@@ -441,32 +440,32 @@ router.get('/disp', function (req, res, next) {
                                 identificar = false;
                             }
                         });
-                        dbUsuario.end();
-                    }
-                });
-                db.end();
-            }
-            else
-            {
-                res.render('errores/info', {
-                    pagina: {
-                        navbar: true
-                    },
-                    titulo: "Errores",
-                    permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos")},
-                    userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
-                    identificar: identificar,
-                    error: {texto: 'NO TIENE PERMISOS PARA VER OTROS DISPOSITIVOS'}
-                });
-            }
-        }
-        else
-        {
-            console.log("no esta identificado");
-            res.location("/usuario/identificar");
-            res.redirect("/usuario/identificar");
-        }
+dbUsuario.end();
+}
+});
+db.end();
+}
+else
+{
+    res.render('errores/info', {
+        pagina: {
+            navbar: true
+        },
+        titulo: "Errores",
+        permisosBase: {user_list: usu.permiso("user_list"), permiso: usu.permiso("permisos")},
+        userBase: {id: req.usuario.id, nombre: usu.get('nombre')},
+        identificar: identificar,
+        error: {texto: 'NO TIENE PERMISOS PARA VER OTROS DISPOSITIVOS'}
     });
+}
+}
+else
+{
+    console.log("no esta identificado");
+    res.location("/usuario/identificar");
+    res.redirect("/usuario/identificar");
+}
+});
 });
 
 router.get('/activar', function (req, res, next) {
@@ -490,7 +489,7 @@ router.get('/activar', function (req, res, next) {
                     if (err) {
                         manejo_errores(err, res);
                     } else
-                        res.location("/usuario");
+                    res.location("/usuario");
                     res.redirect("/usuario");
                 });
                 db.end();
@@ -519,3 +518,12 @@ router.get('/activar', function (req, res, next) {
 });
 
 module.exports = router;
+
+router.get('/prueba', function (req, res, next) {
+    res.render('usuario/prueba', {
+        pagina: {
+            titulo: "test",
+            navbar: false
+        },
+    });   
+});

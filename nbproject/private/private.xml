@@ -15,27 +15,27 @@
             </bookmark>
             <bookmark id="27">
                 <name/>
-                <line>316</line>
+                <line>315</line>
                 <key/>
             </bookmark>
             <bookmark id="32">
                 <name/>
-                <line>378</line>
+                <line>377</line>
                 <key/>
             </bookmark>
             <bookmark id="21">
                 <name/>
-                <line>496</line>
+                <line>495</line>
                 <key/>
             </bookmark>
             <bookmark id="29">
                 <name/>
-                <line>520</line>
+                <line>587</line>
                 <key/>
             </bookmark>
             <bookmark id="26">
                 <name/>
-                <line>520</line>
+                <line>595</line>
                 <key/>
             </bookmark>
         </file>
@@ -48,27 +48,27 @@
             </bookmark>
             <bookmark id="18">
                 <name/>
-                <line>171</line>
+                <line>170</line>
                 <key/>
             </bookmark>
             <bookmark id="11">
                 <name/>
-                <line>205</line>
+                <line>204</line>
                 <key/>
             </bookmark>
             <bookmark id="12">
                 <name/>
-                <line>261</line>
+                <line>260</line>
                 <key/>
             </bookmark>
             <bookmark id="30">
                 <name/>
-                <line>309</line>
+                <line>308</line>
                 <key/>
             </bookmark>
             <bookmark id="31">
                 <name/>
-                <line>316</line>
+                <line>338</line>
                 <key/>
             </bookmark>
         </file>
@@ -76,13 +76,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Quesada/RQL-NodeJS/routes/usuario.js</file>
-            <file>file:/C:/Users/Quesada/RQL-NodeJS/views/rutinas/agregarrutina.jade</file>
-            <file>file:/C:/Users/Quesada/RQL-NodeJS/routes/index.js</file>
-            <file>file:/C:/Users/Quesada/RQL-NodeJS/routes/rutinas.js</file>
-            <file>file:/C:/Users/Quesada/RQL-NodeJS/routes/disp.js</file>
-            <file>file:/C:/Users/Quesada/RQL-NodeJS/routes/roles.js</file>
             <file>file:/C:/Users/Quesada/RQL-NodeJS/app.js</file>
-            <file>file:/C:/Users/Quesada/RQL-NodeJS/routes/permisos.js</file>
         </group>
     </open-files>
 </project-private>

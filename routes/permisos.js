@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
                 var db = req.db();
                 db.query("SELECT id,sys_nombre,nombre,notas FROM permisos", function (err, result) {
                     if (err) {
-                        manejo_errores(1, err, res);
+                        manejo_errores(1,err, res);
                     } else {
                         res.render('permisos/lista', {
                             user: {loged: false},
@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
             }
             else
             {
-                manejo_errores(1, err = "NO ESTA AUTORIZADO PARA ACCEDER A PERMISOS", res);
+                manejo_errores(1,err="NO ESTA AUTORIZADO PARA ACCEDER A PERMISOS", res);
             }
         }
         else
@@ -50,7 +50,7 @@ router.get('/editar', function (req, res, next) {
                 var db = req.db();
                 db.query("SELECT id,sys_nombre,nombre,notas FROM permisos WHERE id='" + req.query.id + "' LIMIT 1", function (err, result) {
                     if (err) {
-                        manejo_errores(1, err, res);
+                        manejo_errores(1,err, res);
                     } else {
                         if (result.length === 0) {
                             manejo_errores(err, res);
@@ -69,7 +69,7 @@ router.get('/editar', function (req, res, next) {
             }
             else
             {
-                manejo_errores(1, err = "NO ESTA AUTORIZADO PARA EDITAR PERMISOS", res);
+                manejo_errores(1,err="NO ESTA AUTORIZADO PARA EDITAR PERMISOS", res);
             }
         }
         else
@@ -100,7 +100,7 @@ router.get('/agregar', function (req, res, next) {
             }
             else
             {
-                manejo_errores(3, err = "NO ESTA AUTORIZADO PARA AGREGAR PERMISOS", res);
+                manejo_errores(3,err="NO ESTA AUTORIZADO PARA AGREGAR PERMISOS", res);
             }
         }
         else
@@ -141,7 +141,7 @@ router.get('/remover', function (req, res, next) {
             }
             else
             {
-                manejo_errores(3, err = "NO ESTA AUTORIZADO PARA REMOVER PERMISOS", res);
+                manejo_errores(3,err="NO ESTA AUTORIZADO PARA REMOVER PERMISOS", res);
             }
         }
         else
@@ -178,7 +178,7 @@ router.post('/guardar', function (req, res, next) {
         });
         db.end();
     } else {
-        manejo_errores(1, err, res);
+        manejo_errores(1,err, res);
     }
 });
 
@@ -191,18 +191,18 @@ router.post('/remover', function (req, res, next) {
         db.query("DELETE FROM permisos WHERE id='" + id + "' LIMIT 1;", function (err) {
             if (err)
             {
-                manejo_errores(1, err, res);
+                manejo_errores(1,err, res);
             }
             else
             {
                 res.location("/permisos");
                 res.redirect("/permisos");
-                retVal = 0;
+                retVal = 0;                
             }
         });
         db.end();
     } else {
-        manejo_errores(1, err, res);
+        manejo_errores(1,err, res);
     }
 });
 
