@@ -1,0 +1,69 @@
+extends ../base
+block principal
+    div.panel.panel-success
+        .panel-heading
+            h1.panel-title
+                strong EDITAR DISPOSITIVOS
+
+        .panel-body
+            form(action='/disp/editar', method='POST')
+                input(
+                    name='id',
+                    type='hidden',
+                    value='#{dispositivos.id}'
+                    )
+
+                input(
+                    name='miDispositivo',
+                    type='hidden',
+                    value='#{miDispositivo}'
+                    )
+                
+                div.form-group
+                    label(for='dispositivoID') ID Dispositivo
+                    input.form-control(
+                        type='text', 
+                        name='dispositivoID',
+                        id='dispositivoID',
+                        value='#{dispositivos.id}'
+                        )
+
+                div.form-group
+                    label(for='dispositivoID') Usuario
+                    select.form-control(name='usuario') 
+                        each entrada, i in lista       
+                            if entrada.id == idUsuario
+                                option(value='#{entrada.id}', selected ='') #{entrada.nombre}
+                            else
+                                option(value='#{entrada.id}') #{entrada.nombre}                                      
+
+                div.form-group
+                    label(for='dispositivoID') Tipo
+                    select.form-control(name='tipo') 
+                        each entrada, i in tipos
+                            if entrada == dispositivos.tipo
+                                option(value='#{entrada}', selected ='') #{entrada}
+                            else
+                                option(value='#{entrada}') #{entrada}
+
+                div.form-group
+                    label(for='dispositivoID') Notas
+                    input.form-control(
+                        type='text', 
+                        name='notas',
+                        id='dispositivoID',
+                        value='#{dispositivos.notas}'
+                        )  
+
+                div.form-group
+                    label(for='dispositivoID') Numero
+                    input.form-control(
+                        type='text', 
+                        name='numero',
+                        id='dispositivoID',
+                        value='#{dispositivos.numero}'
+                        )
+                
+                div.btn-group.group.pull-right
+                    a.btn.btn-info(href='javascript:history.go(-1)') Regresar
+                    button.btn.btn-success(type='submit') Enviar

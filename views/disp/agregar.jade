@@ -1,0 +1,56 @@
+extends ../base
+block principal
+    div.panel.panel-success
+        .panel-heading
+            h1.panel-title
+                strong Agregar un nuevo dispositivo
+
+        .panel-body
+            form(role='form',method='POST', action='/disp/agregar')    
+
+                input(
+                    name='miDispositivo',
+                    type='hidden',
+                    value='#{miDispositivo}'
+                    )
+
+                div.form-group
+                    label(for='dispositivoID') Tipo
+                    select.form-control(name='tipo') 
+                        each entrada, i in tipos
+                            option(value='#{entrada}') #{entrada}
+
+                div.form-group
+                    label(for='dispositivoID') Notas
+                    input.form-control(
+                        type='text', 
+                        placeholder='Notas',
+                        name='notas',
+                        autofocus=''
+                        )
+
+                div.form-group
+                    label(for='dispositivoID') Numero
+                    input.form-control(
+                        type='text', 
+                        placeholder='Numero',
+                        name='numero',    
+                        required=''
+                        )   
+
+                div.form-group
+                    label(for='dispositivoID') Usuario
+                    select.form-control(name='usuario') 
+                        each entrada, i in lista       
+                            if entrada.id == idUsuario
+                                option(value='#{entrada.id}', selected ='') #{entrada.nombre}
+                            else
+                                option(value='#{entrada.id}') #{entrada.nombre} 
+
+                div.btn-group.group.pull-right
+                    a.btn.btn-info(href='javascript:history.go(-1)') Regresar
+                    button.btn.btn-success(type='submit') Agregar
+
+                        
+
+

@@ -1,0 +1,44 @@
+extends ../base
+block principal
+    div.panel.panel-success
+        .panel-heading
+            h1.panel-title
+                strong Agregar Rutinas
+        .panel-body
+            form(action='/rutinas/agregar', method='POST')
+            
+                input(
+                    name='misRutinas',
+                    type='hidden',
+                    value='#{misRutinas}'
+                    )
+                input(
+                    name='user_id',
+                    type='hidden',
+                    value='#{user_id}'
+                    )
+
+                    
+                div.form-group
+                    label(for='Números') Números
+                    input.form-control(type='text', name='numeros', required='',value='',autofocus)
+                div.form-group
+                    label(for='Texto') Texto
+                    input.form-control(type='text', name='texto', required='',value='')
+                label(for='eventos') Eventos
+
+                select.form-control(name='eventos') 
+                    each entrada, i in eventos
+                        option(value="#{entrada.id}") #{entrada.nombre}
+                label(for='dispositivos') Dispositivos
+
+                select.form-control(name='dispositivos') 
+                    each entrada, i in disp
+                        option(value="#{entrada.id}") #{entrada.id}
+                center
+                    label.checkbox.center
+                        input(type='checkbox', value='active-rutine', name='rutina_activa',checked)
+                        |  rutina activa        
+
+                button.btn.btn-lg.btn-primary.btn-block(type='submit') Agregar
+

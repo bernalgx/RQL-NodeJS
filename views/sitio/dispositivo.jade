@@ -1,0 +1,64 @@
+extends ../base.jade
+block javascripts
+    script(src='/plugins/highcharts/highcharts.js')
+    script(src='/plugins/highcharts/highcharts-more.js')
+    script(src='/plugins/highcharts/modules/exporting.js')
+    script(src='/javascripts/graficos.js')
+    script(src='/socket.io/socket.io.js')
+    script.
+        var socket = io.connect('http://localhost:5555');
+        socket.on('connect', function () {});
+        var get = setInterval(function(){ 
+            socket.emit('dispositivo', "#{dispositivo.id}"); 
+        }, 1000);
+        
+        socket.on('data',function(data){
+            if(data.estado===1){
+                clearInterval(get);
+                console.log(data);
+                data = data[2015];
+                var polarData = new Array();
+                var meses = ['enero','febrero','marzo','abril','mayo','junio','julio',
+               'agosto','septiembre','octubre','noviembre','diciembre']
+                for(var i in data["fallas"]){
+                    polarData[polarData.length] = {
+                    name: meses[i],
+                    data: data["fallas"][i],
+                    pointPlacement: 'on'
+                    };
+                }
+                graficoPolar("#fallos","Fallas",["Arranques de sistema","Fallas eletricas","Nivel bajo","Fallas Termicas"],polarData);
+                var dataLinear = new Array();
+                var entradasLinear = new Array();
+                for(var i in data["trabajo"]){
+                    var indice = dataLinear.length;
+                    dataLinear[indice] = {
+                        name: meses[i],
+                        data: new Array()
+                    };
+                    for(var j=0;j<31;j++){
+                        if(data["trabajo"][i][j+1]){
+                            dataLinear[indice].data[j] = data["trabajo"][i][j+1];
+                        }else{
+                            dataLinear[indice].data[j] = 0;
+                        }
+                        entradasLinear[j] = ""+(j+1);
+                    }
+                }
+                console.log(dataLinear);
+                graficoLinear("#trabajo","Horas trabajadas","Horas",entradasLinear,dataLinear);
+            }
+        });
+    block principal
+        div.panel.panel-success
+            div.panel-heading
+                
+                h2 Informacion del dispositivo #{dispositivo.id} (#{dispositivo.tipo})
+                    small
+                        #{dispositivo.notas}
+            div.panel-body
+                div#fallos(style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto")
+                div#trabajo(style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto")
+
+                
+    

@@ -1,0 +1,47 @@
+extends ../base
+block principal
+    div.panel.panel-success
+        .panel-heading
+            h1.panel-title
+                strong Editar Rutinas
+        .panel-body
+            form(action='/rutinas/editar', method='POST')
+                //button.btn.btn-lg.btn-primary.btn-block(type='submit') Editar 
+
+                input(
+                    name='misRutinas',
+                    type='hidden',
+                    value='#{misRutinas}'
+                    )
+                input(
+                    name='user_id',
+                    type='hidden',
+                    value='#{user_id}'
+                    )
+                
+                input(name='id_rutina',type='hidden',value='#{rut.id_rutina}')
+                       
+                div.form-group
+                    label(for='Números') Número
+                    input.form-control(type='text', name='numero', required='',value='#{rut.numero}')
+                div.form-group
+                    label(for='Texto') Texto
+                    input.form-control(type='text', name='texto', required='',value='#{rut.texto}')
+
+                label(for='eventos') Eventos
+                select.form-control(name='evento') 
+                    each entrada, i in eventos
+                        if entrada.id == id_evento
+                            option(value='#{entrada.id}', selected ='') #{entrada.nombre}
+                        else 
+                            option(value="#{entrada.id}") #{entrada.nombre}
+
+                label(for='dispositivos') Dispositivos                
+                select.form-control(name='dispositivo') 
+                    each entrada, i in disp
+                        if entrada.id == id_disp
+                            option(value='#{entrada.id}', selected ='') #{entrada.id}
+                        else 
+                            option(value="#{entrada.id}") #{entrada.id}         
+
+                button.btn.btn-lg.btn-primary.btn-block(type='submit') Editar    

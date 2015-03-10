@@ -1,0 +1,8 @@
+extends ../base.jade
+block principal
+    .alert.alert-info #{error.texto}
+    div.container
+        div.btn-group.group.pull-right
+            a.btn.btn-info(href='javascript:history.go(-1)') Regresar
+            //mensajes correspondientes al login, contraseña incorecta contraseña mujy corta, usuario 
+            //incorrecto las contraseñas no coinnciden etc

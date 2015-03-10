@@ -1,0 +1,33 @@
+extends ../base.jade
+block principal
+    div.panel.panel-danger
+        .panel-heading
+            h1.panel-title
+                strong Remover rutina
+            small TRATAR CON CUIDADO
+              
+        .panel-body
+            h2 Está seguro que desea remover la rutina #{rutina.id_rutina} del dispositivo #{rutina.dispositivo} con evento: #{rutina.nombre}
+                               
+            form(action='/rutinas/remover', method='POST')
+
+                input(
+                    name='misRutinas',
+                    type='hidden',
+                    value='#{misRutinas}'
+                    )
+                input(
+                    name='user_id',
+                    type='hidden',
+                    value='#{user_id}'
+                    )
+                input(
+                    type='hidden',
+                    name='id',
+                    value='#{rutina.id_rutina}'
+                    )
+                div.btn-group.group.pull-left
+                    a.btn.btn-success(href='javascript:history.go(-1)') Regresar
+                    button.btn.btn-danger(type='submit') REMOVER
+               
+

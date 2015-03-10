@@ -1,0 +1,19 @@
+extends ../base.jade
+block principal
+    div.container
+        div.row
+            div.col-md-8.col-md-offset-2(style="margin-top:10%;")
+                div.panel.panel-success
+                    div.panel-heading
+                        h2 Agregar un nuevo usuario.
+                div.panel-body
+                    form.form-signin(role='form',method='POST', action='/usuario/agregar')
+                        input.form-control(type='text',autocomplete='off', placeholder='Usuario', name='usuario', required='', autofocus='')
+                        input.form-control(type='text', name='pass', placeholder='Contraseña', required='')
+                        select.form-control(name='role') 
+                            each entrada, i in lista
+                                option(value="#{entrada.id}") #{entrada.nombre}
+
+                        button.btn.btn-lg.btn-primary.btn-block(type='submit') Agregar
+                        //errores de permisos, no tiene permisos para ara agregar editar dispositivos rutinas usuarios etc.
+

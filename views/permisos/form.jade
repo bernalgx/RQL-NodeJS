@@ -1,0 +1,47 @@
+extends ../base
+block principal
+    div.panel.panel-success
+        .panel-heading
+            h1.panel-title
+                strong PERMISOS
+            if id==null
+                small Agregando un nuevo permiso
+            else
+                small Editando permiso
+        .panel-body
+            form(action='/permisos/guardar', method='POST')
+                input(
+                    name='id',
+                    type='hidden',
+                    value='#{permiso.id}'
+                    )
+                div.form-group
+                    label(for='permisoID') sys_nombre
+                    input.form-control(
+                        type='text', 
+                        name='sys_nombre',
+                        id='permisoID',
+                        value='#{permiso.sys_nombre}',
+                        autofocus=''
+                        )
+                    
+                div.form-group
+                    label(for='permisoID') Nombre
+                    input.form-control(
+                        type='text', 
+                        name='nombre',
+                        id='permisoID',
+                        value='#{permiso.nombre}'
+                        )
+                div.form-group
+                    label(for='permisoID') Notas
+                    input.form-control(
+                        type='text', 
+                        name='notas',
+                        id='permisoID',
+                        value='#{permiso.notas}'
+                        )
+                div.btn-group.group.pull-right
+                    a.btn.btn-info(href='javascript:history.go(-1)') Regresar
+                    button.btn.btn-success(type='submit') Enviar
+            

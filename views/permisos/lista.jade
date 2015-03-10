@@ -1,0 +1,32 @@
+extends ../base
+block principal
+    div.panel.panel-success
+        .panel-heading
+            h1.panel-title
+                strong PERMISOS
+            small TRATAR CON CUIDADO
+        div.panel-body    
+            div.panel.panel-default
+                table.table.table-hover
+                    tr
+                        th Id
+                        th sys_nombre
+                        th Nombre
+                        th Notas
+                        
+                    each entrada, i in lista
+                        tr
+                            td #{entrada.id}
+                            td #{entrada.sys_nombre}
+                            td #{entrada.nombre}
+                            td #{entrada.notas}
+                            td 
+                                div.btn-group.group.pull-right
+                                    a.btn.btn-default.btn-info(type='button', href='/permisos/editar?id=#{entrada.id}')
+                                        span.glyphicon.glyphicon-pencil
+                                    a.btn.btn-default.btn-danger(type='button', href='/permisos/remover?id=#{entrada.id}')
+                                        span.glyphicon.glyphicon-remove
+
+            div.btn-group.group.pull-right
+                    a.btn.btn-info(href='javascript:history.go(-1)') Regresar
+                    a.btn.btn-success(href="/permisos/agregar") Agregar nuevo

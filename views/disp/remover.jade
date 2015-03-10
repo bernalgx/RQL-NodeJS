@@ -1,0 +1,50 @@
+extends ../base.jade
+block principal
+    div.panel.panel-danger
+        .panel-heading
+            h1.panel-title
+                strong Remover dispositivo
+                        
+        .panel-body
+            h2 Esta seguro de eliminar el dispositivo:
+            br
+            table.table
+                tr
+                    th Dispositivo
+                    th ID Usuario
+                    th Usuario
+                    th Tipo
+                  
+                tr
+                    td #{disp.id}
+                    td #{disp.usuario}
+                    td #{nombreUsuario}
+                    td #{disp.tipo}
+                    
+            form(action='/disp/remover', method='POST')
+                input(
+                    type='hidden',
+                    name='id',
+                    value='#{disp.id}'
+                    
+                    )
+
+                input(
+                    type='hidden',
+                    name='usuario',
+                    value='#{disp.usuario}'
+                    
+                    )
+
+                input(
+                    name='miDispositivo',
+                    type='hidden',
+                    value='#{miDispositivo}'
+                    )
+
+                div.btn-group.group.pull-right
+                    a.btn.btn-success(href='javascript:history.go(-1)') Regresar
+                    button.btn.btn-danger(type='submit') REMOVER
+
+
+                    

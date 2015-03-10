@@ -1,0 +1,29 @@
+extends ../base
+block principal
+    div.panel.panel-danger
+        .panel-heading
+            h1.panel-title
+                strong Remover permiso
+            small TRATAR CON CUIDADO
+              
+        .panel-body
+            h2 Esta seguro de eliminar el permiso:
+            br
+            table.table
+                tr
+                    th ID
+                    th Nombre
+                    th Notas
+                tr
+                    td #{permiso.id}
+                    td #{permiso.nombre}
+                    td #{permiso.notas}
+            form(action='/permisos/remover', method='POST')
+                input(
+                    type='hidden',
+                    name='id',
+                    value='#{permiso.id}'
+                    )
+                div.btn-group.group.pull-right
+                    a.btn.btn-success(href='javascript:history.go(-1)') Regresar
+                    button.btn.btn-danger(type='submit') REMOVER

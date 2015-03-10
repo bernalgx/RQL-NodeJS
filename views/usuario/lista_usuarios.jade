@@ -1,0 +1,40 @@
+extends ../base
+block principal
+    div.panel.panel-success
+        div.panel-heading
+            h1.panel-title
+                strong Usuarios
+            small TRATAR CON CUIDADO
+        div.panel-body
+            div.panel.panel-default
+                table.table.table-hover
+                    tr
+                        th Id
+                        th Nombre
+                        th Role
+                        th Activo
+                    each entrada, i in lista_usuarios
+                        tr
+                            td #{entrada.id}
+                            td #{entrada.nombre}
+                            td #{entrada.role}
+
+                            if entrada.Activo == 0
+                                td 
+                                    a.span.glyphicon.glyphicon-ok.remove_hand(href='/usuario/activar?id_usuario=#{entrada.id}&activar=#{entrada.Activo}')
+                            else
+                                td 
+                                    a.span.glyphicon.glyphicon-remove.remove_hand(href='/usuario/activar?id_usuario=#{entrada.id}&activar=#{entrada.Activo}') 
+                            td
+                                div.btn-group.group.pull-right
+                                    a.btn.btn-default.btn-info(type='button', href='/usuario/editar?idUsuario=#{entrada.id}')
+                                        span.glyphicon.glyphicon-pencil
+                                    a.btn.btn-default.btn-danger(type='button', href='/usuario/remover?idUsuario=#{entrada.id}')
+                                        span.glyphicon.glyphicon-remove
+                                    a.btn.btn-default.btn-info(type='button', href='/usuario/disp?idUsuario=#{entrada.id}')
+                                        span.glyphicon.glyphicon-grain
+                                    a.btn.btn-default.btn-info(type='button', href='/rutinas?idUsuario=#{entrada.id}')
+                                        span.glyphicon.glyphicon-flash
+            div.btn-group.group.pull-right
+                a.btn.btn-info(href='javascript:history.go(-1)') Regresar
+                a.btn.btn-success(href="/usuario/agregar") Agregar Nuevo

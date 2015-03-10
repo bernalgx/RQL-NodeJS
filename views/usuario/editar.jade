@@ -1,0 +1,70 @@
+extends ../base
+block principal
+    div.panel.panel-success
+        .panel-heading
+            h1.panel-title
+                strong #{nombreUsuario}
+
+        .panel-body
+            form(action='/usuario/editar', method='POST')
+                input(
+                    name='id',
+                    type='hidden',
+                    value='#{usuario.id}'
+                    )
+                div.form-group
+                    label(for='usuarioNombre')              Nombre
+                    input.form-control(
+                        type='text', 
+                        name='nombre',
+                        id='usuarioID',
+                        value='#{usuario.nombre}'
+                        )
+                div.form-group
+                    label(for='pass')                       Contraseña
+                    input.form-control(
+                        type='password', 
+                        name='pass',
+                        id='usuarioID',
+                        value='',
+                        required=''
+                        )
+                div.form-group
+                    label(for='pass2')                      Confirmar contraseña
+                    input.form-control(
+                        type='password', 
+                        name='pass2',
+                        id='usuarioID',
+                        value='',
+                        required=''
+                        ) 
+                if permisosBase.user_edit
+                    div.form-group
+                        label(for='role') Role
+                        select.form-control(name='role') 
+                            each entrada, i in roles
+                                if entrada.id == role
+                                    option(value='#{entrada.id}', selected ='') #{entrada.nombre}
+                                else
+                                    option(value="#{entrada.id}") #{entrada.nombre}
+                else
+                    input(
+                    name='role',
+                    type='hidden',
+                    value='#{role}'
+                    )
+
+                input(
+                    name='miUsuario',
+                    type='hidden',
+                    value='#{miUsuario}'
+                    )
+
+                    
+
+                div.btn-group.group.pull-right
+                    a.btn.btn-info(href='javascript:history.go(-1)') Regresar
+                    button.btn.btn-success(type='submit') Editar
+                
+
+        

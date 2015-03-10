@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="32">
+        <file>
+            <url>routes/usuario.js</url>
+            <bookmark id="23">
+                <name/>
+                <line>84</line>
+                <key/>
+            </bookmark>
+            <bookmark id="22">
+                <name/>
+                <line>213</line>
+                <key/>
+            </bookmark>
+            <bookmark id="27">
+                <name/>
+                <line>315</line>
+                <key/>
+            </bookmark>
+            <bookmark id="32">
+                <name/>
+                <line>377</line>
+                <key/>
+            </bookmark>
+            <bookmark id="21">
+                <name/>
+                <line>495</line>
+                <key/>
+            </bookmark>
+            <bookmark id="29">
+                <name/>
+                <line>587</line>
+                <key/>
+            </bookmark>
+            <bookmark id="26">
+                <name/>
+                <line>595</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>routes/disp.js</url>
+            <bookmark id="2">
+                <name/>
+                <line>47</line>
+                <key/>
+            </bookmark>
+            <bookmark id="18">
+                <name/>
+                <line>170</line>
+                <key/>
+            </bookmark>
+            <bookmark id="11">
+                <name/>
+                <line>204</line>
+                <key/>
+            </bookmark>
+            <bookmark id="12">
+                <name/>
+                <line>260</line>
+                <key/>
+            </bookmark>
+            <bookmark id="30">
+                <name/>
+                <line>308</line>
+                <key/>
+            </bookmark>
+            <bookmark id="31">
+                <name/>
+                <line>338</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Quesada/RQL-NodeJS/routes/usuario.js</file>
+            <file>file:/C:/Users/Quesada/RQL-NodeJS/app.js</file>
+        </group>
+    </open-files>
+</project-private>

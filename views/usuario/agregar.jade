@@ -1,0 +1,44 @@
+extends ../base.jade
+block principal
+    div.container
+        div.row
+            div.col-md-8.col-md-offset-2(style="margin-top:10%;")
+                div.panel.panel-success
+                    div.panel-heading
+                        h2 Agregar un nuevo usuario.
+                div.panel-body
+                    form(role='form',method='POST',autocomplete='off', action='/usuario/agregar')
+                        div.form-group
+                            input.form-control(type='text', placeholder='Usuario', name='usuario', required='', autofocus='')
+                            label(for='pass') 
+                            input.form-control(
+                                type='password', 
+                                name='pass',
+                                id='usuarioID',
+                                value='',
+                                placeholder='Contraseña',
+                                required=''
+                                )
+                       
+                            label(for='pass2') 
+                            input.form-control(
+                                type='password', 
+                                name='pass2',
+                                id='usuarioID',
+                                value='',
+                                placeholder='Confirmar contraseña',
+                                required=''
+                                ) 
+
+                        div.form-group
+                            select.form-control(name='role') 
+                                each entrada, i in lista
+                                    option(value="#{entrada.id}") #{entrada.nombre}
+
+                            center
+                               label.checkbox.center
+                                   input(type='checkbox', value='active-user', name='usuario_activo')
+                                   |  usuario activo
+
+                        button.btn.btn-lg.btn-primary.btn-block(type='submit') Agregar
+

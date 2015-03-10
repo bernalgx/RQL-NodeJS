@@ -1,0 +1,30 @@
+extends ../base.jade
+block principal
+    div.panel.panel-danger
+        .panel-heading
+            h1.panel-title
+                strong Remover usuario
+            small TRATAR CON CUIDADO
+              
+        .panel-body
+            h2 Esta seguro de eliminar el usuario:
+            br
+            table.table
+                tr
+                    th ID
+                    th Nombre                 
+                tr
+                    td #{usuario.id}
+                    td #{usuario.nombre}
+                    
+            form(action='/usuario/remover', method='POST')
+                input(
+                    type='hidden',
+                    name='id',
+                    value='#{usuario.id}'
+                    )
+                div.btn-group.group.pull-right
+                    a.btn.btn-success(href='javascript:history.go(-1)') Regresar
+                    button.btn.btn-danger(type='submit') REMOVER
+                
+

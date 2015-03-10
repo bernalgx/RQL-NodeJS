@@ -1,0 +1,8 @@
+extends layout
+
+block content
+        h1.
+            User List
+        ul
+            each entrada, i in data
+                li #{entrada.nombre}

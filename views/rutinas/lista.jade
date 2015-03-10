@@ -1,0 +1,31 @@
+extends ../base
+block principal
+    div.panel.panel-success
+        .panel-heading
+            h1.panel-title
+                strong RUTINAS
+            small TRATAR CON CUIDADO
+        div.panel-body    
+            div.panel.panel-default
+                table.table.table-hover
+                    tr
+                        th Dispositivo
+                        th Evento
+                        th Numero
+                        th Texto
+                    each entrada, i in lista
+                        tr
+                            td #{entrada.dispositivo}
+                            td #{entrada.evento}
+                            td #{entrada.numero}
+                            td #{entrada.texto}
+                            td 
+                                div.btn-group.group
+                                    a.btn.btn-default.btn-info(type='button', href='/permisos/editar?id=#{entrada.id}')
+                                        span.glyphicon.glyphicon-pencil
+                                    a.btn.btn-default.btn-danger(type='button', href='/permisos/remover?id=#{entrada.id}')
+                                        span.glyphicon.glyphicon-remove
+
+            div.btn-group.group.pull-right
+                    a.btn.btn-info(href='javascript:history.go(-1)') Regresar
+                    button.btn.btn-success(type='submit') Agregar Nuevo

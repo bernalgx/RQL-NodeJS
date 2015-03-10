@@ -1,0 +1,6 @@
+extends layout
+
+block content
+    form(method="POST", action="/", enctype="multipart/form-data")
+        !{form_body}
+        input(type="submit")

@@ -1,0 +1,46 @@
+extends ../base.jade
+block principal
+
+    div.panel.panel-success
+        div.panel-heading
+            h1.panel-title
+                strong #{nombreUsuario}
+
+        div.panel-body
+            div.panel.panel-default
+                table.table.table-hover
+                    tr
+                        th Id
+                        th Tipo
+                        th Notas
+                        th #Tel
+
+                    each entrada, i in dispositivos
+                        tr
+                            td #{entrada.id}
+                            td #{entrada.tipo}
+                            td #{entrada.notas}
+                            td #{entrada.numero}
+                            td 
+                                div.btn-group.group.pull-right
+                                    a.btn.btn-default.btn-success(type='button', href='/dispositivo?idUsuario=#{user_id}&id=#{entrada.id}')
+                                        |Ver detalles
+
+                            if disp_delete
+
+                               td
+                                   div.btn-group.group.pull-right
+
+                                            a.btn.btn-default.btn-info(type='button', href='/disp/editar?idUsuario=#{user_id}&id=#{entrada.id}')
+                                                span.glyphicon.glyphicon-pencil
+
+                                            a.btn.btn-default.btn-danger(type='button', href='/disp/remover?idUsuario=#{user_id}&id=#{entrada.id}')
+                                                span.glyphicon.glyphicon-remove  
+
+                                            
+
+            div.btn-group.group.pull-right
+                if !identificar || disp_delete
+                    a.btn.btn-info(href='javascript:history.go(-1)') Regresar
+                if disp_delete
+                    a.btn.btn-success(href="/disp/agregar?idUsuario=#{user_id}") Agregar nuevo
